@@ -47,4 +47,11 @@ def rooms(request,room_id=None):
 		raise Http404('Room does not exist')
 	return render(request,'homes/room.html',{'room': room})
 	
+def user_rooms(request, user_id=None):
+	try:
+		owner = User.objects.get(id=user_id)
+		rooms = Room.objects.filter(owner = owner)
+	except User.DoesNotExist:
+		raise Http404('Url error, check user id')
+	return render(request,'homes/user_rooms.html',{'rooms':rooms,'owner':owner.username})
 

@@ -1,0 +1,5 @@
+<h3> Rooms that belong to {{owner}} </h3>
+
+<ul>
+	<li><a href="{% url 'homes:rooms' room.id %}">{{ room.id}}</a></li>
+</ul>

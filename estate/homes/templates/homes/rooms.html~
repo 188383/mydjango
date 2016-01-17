@@ -1,5 +1,13 @@
 <h1>{{header}}</h1>
 
+<ul>
+	
 {% for room in rooms %}
-{{room}}
+<li>
+		<div style="margin:20px; border:1px solid black;">
+{{room.id}} <a href="{% url 'homes:user_rooms' room.owner.id%}">{{room.owner}}</a> <a href="{% url 'homes:rooms' room.id %}">go to room</a> <img alt="img" style="width:100px;height:100px"/>
+	</div>
+</li>
 {% endfor %}
+	
+</ul>
