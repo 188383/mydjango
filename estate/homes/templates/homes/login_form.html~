@@ -1,0 +1,8 @@
+<h1> This is the login page for regular users </h1>
+
+<form action="{% url 'homes:login'%}" method="post">
+{% csrf_token %}
+username: <input type="text" name="username" id="1"></input>
+password: <input type="password" name="password" id="2"></input>
+<input type="submit" value="Login"/>
+</form>

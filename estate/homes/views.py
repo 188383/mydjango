@@ -1,8 +1,13 @@
 from django.shortcuts import render
-from django.http import Http404,HttpResponse
+from django.http import Http404,HttpResponse,HttpResponseRedirect
+from django.core.urlresolvers import reverse
+
+from django.contrib.auth import login as L,authenticate as A
 
 #from django.template import loader 
-from .models import Room,User
+from .models import Room
+
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -35,8 +40,9 @@ def list_rooms(request):
 	
 	rooms = Room.objects.all()[skip:limit]
 	
-	
+	#read the generic views documentation to decide whether this app needs the generic views module
 	return render(request,'homes/rooms.html',{'rooms':rooms,'header':header})
+
 #	operations on a room that will have an id passed.
 #	If the room has an ID we can perform updates on it
 # 	note django doesn't support PUT and DELETE
@@ -47,6 +53,8 @@ def rooms(request,room_id=None):
 		raise Http404('Room does not exist')
 	return render(request,'homes/room.html',{'room': room})
 	
+
+# lists the rooms that belong to a specific user
 def user_rooms(request, user_id=None):
 	try:
 		owner = User.objects.get(id=user_id)
@@ -55,3 +63,20 @@ def user_rooms(request, user_id=None):
 		raise Http404('Url error, check user id')
 	return render(request,'homes/user_rooms.html',{'rooms':rooms,'owner':owner.username})
 
+
+#login page, remember the redirect for post requests, seen here in else, which should process the form appropriately
+
+def login(request):
+	if request.method == 'GET':
+		return render(request,'homes/login_form.html')
+	else:
+		 username = request.POST['username']
+		 password = request.POST['password']
+		 	
+		 user = A(username=username,password=password)
+		 if user.is_active:
+		 	L(request,user)
+		 
+		 return HttpResponse(str(user) + " has been logged in!")
+		 
+		 

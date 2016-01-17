@@ -7,8 +7,9 @@ from . import views
 app_name = 'homes'
 urlpatterns = [
 	url(r'^$',views.index,name='index'),
-	url(r'^about/$',views.about,name='home'),
+	url(r'^about/$',views.about,name='about'),
 	url(r'^rooms/?$',views.list_rooms,name='list_rooms'),
 	url(r'^rooms/(?P<room_id>[0-9]+)/?$',views.rooms,name='rooms'),
-	url(r'^user/(?P<user_id>[0-9]+)/?$',views.user_rooms, name= 'user_rooms');
+	url(r'^user/(?P<user_id>[0-9]+)/?$',views.user_rooms, name= 'user_rooms'),
+	url(r'^login/?$',views.login,name="login"),
 ]
