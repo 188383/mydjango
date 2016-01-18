@@ -1,0 +1,8 @@
+from django import forms 
+
+from homes.models import *
+
+class FormModel(forms.ModelForm):
+    class Meta:
+
+        model = Room
