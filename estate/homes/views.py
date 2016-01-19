@@ -8,7 +8,7 @@ from django.contrib.auth import login as L,authenticate as A
 from .models import Room
 
 from django.contrib.auth.models import User
-from homes.forms import UserRegisterForm
+from homes.forms import UserRegisterForm,UserLoginForm
 
 # Create your views here.
 
@@ -70,7 +70,8 @@ def user_rooms(request, user_id=None):
 
 def login(request):
 	if request.method == 'GET':
-		return render(request,'homes/login_form.html')
+		form = UserLoginForm
+		return render(request,'homes/login_form.html',{'form':form})
 	else:
 		 username = request.POST['username']
 		 password = request.POST['password']
