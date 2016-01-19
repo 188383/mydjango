@@ -1,0 +1,4 @@
+<form action="{% url 'homes:register' %}" method="post">
+	{% csrf_token %}
+	{{form}}
+</form>

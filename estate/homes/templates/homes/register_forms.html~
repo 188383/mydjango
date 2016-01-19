@@ -1,0 +1,3 @@
+<form action="{% url 'homes:register' %}" method="post">
+	{{form}}
+</form>

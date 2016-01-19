@@ -12,4 +12,5 @@ urlpatterns = [
 	url(r'^rooms/(?P<room_id>[0-9]+)/?$',views.rooms,name='rooms'),
 	url(r'^user/(?P<user_id>[0-9]+)/?$',views.user_rooms, name= 'user_rooms'),
 	url(r'^login/?$',views.login,name="login"),
+	url(r'^register/?',views.register,name="register"),
 ]
