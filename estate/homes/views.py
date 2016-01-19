@@ -8,17 +8,18 @@ from django.contrib.auth import login as L,authenticate as A
 from .models import Room
 
 from django.contrib.auth.models import User
-from homes.forms import *
+from homes.forms import UserRegisterForm
 
 # Create your views here.
 
 def index(request):
 	text = 'Index page, fuck PHP'
-	template = loader.get_template('homes/index.html')
+	#template = loader.get_template('homes/index.html')
 	context = {
 		'text': text,
 	}
-	return HttpResponse(template.render(context,request))
+	#return HttpResponse(template.render(context,request))
+        return render(request,'homes/index.html',context)
 	
 	
 def about(request):
@@ -83,10 +84,10 @@ def login(request):
 def register(request):
 # we have received a request to register a user
 	if request.method == 'POST':
-		pass
+		return HttpResponse(request.POST['username'])
 	else:
 		form = UserRegisterForm
-	return render(request,'homes/register_form',form)
+                return render(request,'homes/register_forms.html',{'form':form})
 	
 	
 		 

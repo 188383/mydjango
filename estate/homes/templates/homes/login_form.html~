@@ -2,7 +2,7 @@
 
 <form action="{% url 'homes:login'%}" method="post">
 {% csrf_token %}
-username: <input type="text" name="username" id="1"></input>
+username: <input type="text" name="username" id="1" required></input>
 password: <input type="password" name="password" id="2"></input>
 <input type="submit" value="Login"/>
 </form>
