@@ -3,6 +3,7 @@ from django.http import Http404,HttpResponse,HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
 from django.contrib.auth import login as L,authenticate as A
+from django.contrib.auth import logout as Logout
 
 #from django.template import loader 
 from .models import Room
@@ -10,6 +11,7 @@ from .models import Room
 from django.contrib.auth.models import User
 from homes.forms import UserRegisterForm,UserLoginForm
 
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request):
@@ -77,18 +79,28 @@ def login(request):
 		 password = request.POST['password']
 		 	
 		 user = A(username=username,password=password)
-		 if user.is_active:
-		 	L(request,user)
-		 
-		 return HttpResponse(str(user) + " has been logged in!")
+                 try:
+                         if user.is_active:
+                                 L(request,user)
+                 except Exception as inst:
+                        raise Http404()
+		 return HttpResponseRedirect("done")
+
+def logout(request):
+        try:
+                Logout(request)
+        except Exception:
+                pass
+        return HttpResponseRedirect('/')
+        
 		 
 def register(request):
 # we have received a request to register a user
 	if request.method == 'POST':
+                
 		return HttpResponse(request.POST['username'])
 	else:
 		form = UserRegisterForm
                 return render(request,'homes/register_forms.html',{'form':form})
 	
 	
-		 

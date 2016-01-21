@@ -5,6 +5,9 @@ from . import views
 # when adding app_name to the urlConf file, we are namespacing the urls for the templating system.
 #another change is the structure of the templates directory
 app_name = 'homes'
+
+
+
 urlpatterns = [
 	url(r'^$',views.index,name='index'),
 	url(r'^about/$',views.about,name='about'),
@@ -13,4 +16,5 @@ urlpatterns = [
 	url(r'^user/(?P<user_id>[0-9]+)/?$',views.user_rooms, name= 'user_rooms'),
 	url(r'^login/?$',views.login,name="login"),
 	url(r'^register/?$',views.register,name="register"),
+        url(r'^logout/?$',views.logout,name="logout"), 
 ]
